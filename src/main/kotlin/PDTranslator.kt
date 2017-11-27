@@ -1,5 +1,6 @@
 import di.component.DaggerTranslationComponent
 import di.component.TranslationComponent
+import model.api.Status
 
 /**
  * @author molszak
@@ -20,8 +21,8 @@ class PDTranslator {
             val translator = component.translator()
             translator.getTranslation()
                     .subscribe({ response ->
-                        if (response.throwable != null) {
-                            println("ERROR receiving")
+                        if (response.status == Status.ERROR) {
+                            println("ERROR receiving : ${response.throwable?.toString()}")
                         } else {
                             println("translation: ${response.data}")
                         }

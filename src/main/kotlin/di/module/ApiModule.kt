@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit
 @Module
 class ApiModule {
 
-
     @Provides
     @PerApplication
     internal fun provideInterceptor(): Interceptor {

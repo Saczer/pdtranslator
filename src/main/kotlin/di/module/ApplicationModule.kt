@@ -14,7 +14,7 @@ import presentation.Translator
  * created on 27.11.2017.
  */
 @PerApplication
-@Module(includes = arrayOf(RestModule::class) )
+@Module
 class ApplicationModule {
 
 
@@ -23,6 +23,10 @@ class ApplicationModule {
     internal fun provideTranslationRepository(
             repository: RestTranslationRepository): TranslationRepository = repository
 
+    @Provides
+    @PerApplication
+    internal fun provideTranslationUseCase(
+            repository: TranslationRepository) : TranslationUseCase = TranslationUseCase(repository)
 
     @Provides
     @PerApplication

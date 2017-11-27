@@ -11,7 +11,7 @@ import retrofit2.Retrofit
  * created on 27.11.2017.
  */
 @PerApplication
-@Module(includes = arrayOf(ApiModule::class))
+@Module
 class RestModule {
 
     @Provides
