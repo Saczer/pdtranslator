@@ -1,0 +1,23 @@
+ext {
+    pdfboxVersion = '2.0.8'
+    retrofitVersion = '2.3.0'
+    daggerVersion = '2.13'
+    rxVersion = '2.1.6'
+    okhttpVersion = '3.9.1'
+    moshiVersion = '1.5.0'
+    persistenceVersion = '2.2.0'
+
+    translatorDependencies = [
+            pdfbox            : "org.apache.pdfbox:pdfbox:$pdfboxVersion",
+            retrofit          : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitRxAdapter : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            dagger            : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:$daggerVersion",
+            rxJava            : "io.reactivex.rxjava2:rxjava:$rxVersion",
+            okhttp            : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            moshi             : "com.squareup.moshi:moshi:$moshiVersion",
+            moshiKotlin       : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
+            moshiConverter    : "com.squareup.retrofit2:converter-moshi:$retrofitVersion",
+            eclipsePersistence: "org.eclipse.persistence:javax.persistence:$persistenceVersion"
+    ]
+}
