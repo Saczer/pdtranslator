@@ -34,11 +34,9 @@ class TestTranslator @Inject constructor(private val translationUseCase: Transla
                 subject.onNext(Response.error(error))
             }
 
-        })
+        }, params = text)
     }
 
     override fun getTranslation(): Observable<Response<String>> = subject
 
-    override fun translate(input: File) {
-    }
 }

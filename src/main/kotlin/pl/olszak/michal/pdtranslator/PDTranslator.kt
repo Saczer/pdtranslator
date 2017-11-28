@@ -11,6 +11,7 @@ import pl.olszak.michal.pdtranslator.model.api.Status
 class PDTranslator {
 
     fun component() : TranslationComponent {
+
         return DaggerTranslationComponent
                 .builder()
                 .build()
@@ -21,6 +22,9 @@ class PDTranslator {
         fun main(args: Array<String>) {
             val component = PDTranslator().component()
             val translator = component.translator()
+
+            var translated = false
+
             translator.getTranslation()
                     .subscribe({ response ->
                         if (response.status == Status.ERROR) {
@@ -28,10 +32,17 @@ class PDTranslator {
                         } else {
                             println("translation: ${response.data}")
                         }
+                        translated = true
                     })
 
-            translator.translate("There is something smelly in the air")
+            translator.translate("I love my Agata")
+
+            while (!translated){
+                Thread.sleep(500)
+            }
             println("something")
+
+
         }
     }
 }
