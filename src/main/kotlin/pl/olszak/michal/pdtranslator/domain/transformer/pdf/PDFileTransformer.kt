@@ -31,6 +31,7 @@ class PDFileTransformer : FileTransformer {
             val transformed = pageText
                     .replace("\r", " ", true)
                     .replace("\n", " ", true)
+                    .replace(Regex("\\s+"), " ")
             list.add(transformed)
         }
 
