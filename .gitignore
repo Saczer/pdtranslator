@@ -58,7 +58,7 @@ build/**
 .DS_Store
 
 #personal
-src/main/kotlin/pl.olszak.michal.pdtranslator.data/Constants.kt
+src/main/kotlin/pl/olszak/michal/pdtranslator/data/Constants.kt
 *.pdf
 
 # End of https://www.gitignore.io/api/java,intellij
