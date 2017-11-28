@@ -17,6 +17,7 @@ plugins {
 
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'idea'
 
 apply from: 'dependencies.gradle'
 
@@ -43,16 +44,16 @@ dependencies {
             dependencies.moshiConverter,
             dependencies.moshiKotlin)
 
-    kapt dependencies.daggerCompiler
+    kapt "com.google.dagger:dagger-compiler:2.13"
 }
 
 kapt {
     correctErrorTypes = true
 }
 
-/*sourceSets {
+sourceSets {
     main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
-}*/
+}
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
