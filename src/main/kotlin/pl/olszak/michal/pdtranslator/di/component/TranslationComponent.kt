@@ -3,7 +3,7 @@ package pl.olszak.michal.pdtranslator.di.component
 import dagger.Component
 import pl.olszak.michal.pdtranslator.di.module.ApplicationModule
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
-import pl.olszak.michal.pdtranslator.presentation.Translator
+import pl.olszak.michal.pdtranslator.presentation.file.FileTranslator
 
 /**
  * @author molszak
@@ -14,6 +14,6 @@ import pl.olszak.michal.pdtranslator.presentation.Translator
         ApplicationModule::class))
 interface TranslationComponent {
 
-    fun translator(): Translator
+    fun fileTranslator() : FileTranslator
 
 }

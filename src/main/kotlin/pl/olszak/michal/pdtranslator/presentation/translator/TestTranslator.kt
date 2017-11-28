@@ -1,19 +1,18 @@
-package pl.olszak.michal.pdtranslator.presentation
+package pl.olszak.michal.pdtranslator.presentation.translator
 
-import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslationUseCase
 import io.reactivex.Observable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.subjects.PublishSubject
+import pl.olszak.michal.pdtranslator.domain.interactor.translation.StubTranslationUseCase
 import pl.olszak.michal.pdtranslator.model.api.Response
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse
-import java.io.File
 import javax.inject.Inject
 
 /**
  * @author molszak
  * created on 27.11.2017.
  */
-class TestTranslator @Inject constructor(private val translationUseCase: TranslationUseCase) : Translator {
+class TestTranslator @Inject constructor(private val translationUseCase: StubTranslationUseCase) : Translator {
 
     private val subject: PublishSubject<Response<String>> = PublishSubject.create()
 
@@ -24,7 +23,7 @@ class TestTranslator @Inject constructor(private val translationUseCase: Transla
                 val output = translation.data
                         .translations
                         .joinToString { response ->
-                            response.translatedText + "\n"
+                            response.translatedText
                         }
 
                 subject.onNext(Response.success(output))

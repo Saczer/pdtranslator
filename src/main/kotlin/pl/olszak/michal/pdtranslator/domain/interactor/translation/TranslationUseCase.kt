@@ -1,10 +1,10 @@
 package pl.olszak.michal.pdtranslator.domain.interactor.translation
 
+import io.reactivex.Single
 import pl.olszak.michal.pdtranslator.data.translation.TranslationRepository
 import pl.olszak.michal.pdtranslator.domain.interactor.SingleUseCase
-import io.reactivex.Single
+import pl.olszak.michal.pdtranslator.model.google.TranslatedTextResponseList
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 /**
@@ -15,11 +15,12 @@ class TranslationUseCase @Inject constructor(
         private val repository: TranslationRepository)
     : SingleUseCase<TranslationApiResponse, String>() {
 
-
+    //TODO should be differently modelled
     override fun buildObservable(params: String?): Single<TranslationApiResponse> {
-        if(!params.isNullOrEmpty()){
+        if (!params.isNullOrEmpty()) {
             return repository.getPolishTranslation(params.orEmpty())
         }
-        throw IllegalArgumentException("no text entered to translate")
+        return Single.just(TranslationApiResponse(TranslatedTextResponseList(emptyList())))
     }
+
 }

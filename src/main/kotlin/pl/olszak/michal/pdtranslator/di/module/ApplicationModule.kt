@@ -5,9 +5,13 @@ import dagger.Provides
 import pl.olszak.michal.pdtranslator.data.translation.RestTranslationRepository
 import pl.olszak.michal.pdtranslator.data.translation.TranslationRepository
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
+import pl.olszak.michal.pdtranslator.domain.interactor.translation.StubTranslationUseCase
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslationUseCase
-import pl.olszak.michal.pdtranslator.presentation.TestTranslator
-import pl.olszak.michal.pdtranslator.presentation.Translator
+import pl.olszak.michal.pdtranslator.domain.transformer.pdf.PDFileTransformer
+import pl.olszak.michal.pdtranslator.presentation.file.FileTranslator
+import pl.olszak.michal.pdtranslator.presentation.file.PDFileTranslator
+import pl.olszak.michal.pdtranslator.presentation.translator.TestTranslator
+import pl.olszak.michal.pdtranslator.presentation.translator.Translator
 
 /**
  * @author molszak
@@ -15,7 +19,7 @@ import pl.olszak.michal.pdtranslator.presentation.Translator
  */
 @PerApplication
 @Module(includes = arrayOf(ApiModule::class))
-class ApplicationModule{
+class ApplicationModule {
 
     @Provides
     @PerApplication
@@ -29,7 +33,13 @@ class ApplicationModule{
     @Provides
     @PerApplication
     fun provideTranslator(
-            translationUseCase: TranslationUseCase): Translator = TestTranslator(translationUseCase)
+            translationUseCase: StubTranslationUseCase): Translator = TestTranslator(translationUseCase)
+
+    @Provides
+    @PerApplication
+    fun provideFileTranslator(translator: Translator): FileTranslator {
+        return PDFileTranslator(translator, PDFileTransformer())
+    }
 
 
 }

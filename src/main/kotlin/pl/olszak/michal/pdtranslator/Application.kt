@@ -3,14 +3,15 @@ package pl.olszak.michal.pdtranslator
 import pl.olszak.michal.pdtranslator.di.component.DaggerTranslationComponent
 import pl.olszak.michal.pdtranslator.di.component.TranslationComponent
 import pl.olszak.michal.pdtranslator.model.api.Status
+import java.io.File
 
 /**
  * @author molszak
  * created on 27.11.2017.
  */
-class PDTranslator {
+class Application {
 
-    fun component() : TranslationComponent {
+    fun component(): TranslationComponent {
 
         return DaggerTranslationComponent
                 .builder()
@@ -20,29 +21,28 @@ class PDTranslator {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val component = PDTranslator().component()
-            val translator = component.translator()
+            val component = Application().component()
+            val translator = component.fileTranslator()
 
-            var translated = false
+            val file = File("ep6.pdf")
+            if(file.exists()){
+                translator.translate(file)
+            }else{
+                println("no file to translate")
+            }
 
-            translator.getTranslation()
-                    .subscribe({ response ->
+            translator.getObservable()
+                    .blockingSubscribe({ response ->
                         if (response.status == Status.ERROR) {
                             println("ERROR receiving : ${response.throwable?.toString()}")
                         } else {
                             println("translation: ${response.data}")
                         }
-                        translated = true
                     })
 
-            translator.translate("I love my Agata")
-
-            while (!translated){
-                Thread.sleep(500)
-            }
-            println("something")
-
-
+//            while (true){
+//                Thread.sleep(200)
+//            }
         }
     }
 }

@@ -42,7 +42,8 @@ dependencies {
             dependencies.retrofitRxAdapter,
             dependencies.okhttp,
             dependencies.moshiConverter,
-            dependencies.moshiKotlin)
+            dependencies.moshiKotlin,
+            dependencies.rxKotlin)
 
     kapt "com.google.dagger:dagger-compiler:2.13"
 }

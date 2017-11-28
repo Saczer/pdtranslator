@@ -1,4 +1,4 @@
-package pl.olszak.michal.pdtranslator.presentation
+package pl.olszak.michal.pdtranslator.presentation.translator
 
 import io.reactivex.Observable
 import pl.olszak.michal.pdtranslator.model.api.Response
