@@ -5,6 +5,6 @@ package pl.olszak.michal.pdtranslator.model
  * created on 27.11.2017.
  */
 enum class Language constructor(val code: String) {
-    PL("pl"),
-    EN("en");
+    POLISH("pl"),
+    ENGLISH("en");
 }

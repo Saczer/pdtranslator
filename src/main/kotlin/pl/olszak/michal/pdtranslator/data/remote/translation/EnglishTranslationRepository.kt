@@ -17,8 +17,8 @@ class EnglishTranslationRepository @Inject constructor(private val service: Rest
     override fun getPolishTranslation(text: String): Single<TranslationApiResponse> {
         val request = TranslationRequest(
                 text,
-                Language.EN,
-                Language.PL)
+                Language.ENGLISH,
+                Language.POLISH)
 
         return service.translate(
                 request.toTranslate,
