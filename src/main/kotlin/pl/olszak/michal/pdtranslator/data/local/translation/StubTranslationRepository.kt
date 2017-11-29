@@ -1,6 +1,7 @@
-package pl.olszak.michal.pdtranslator.data.translation
+package pl.olszak.michal.pdtranslator.data.local.translation
 
 import io.reactivex.Single
+import pl.olszak.michal.pdtranslator.data.TranslationRepository
 import pl.olszak.michal.pdtranslator.model.google.TranslatedTextResponse
 import pl.olszak.michal.pdtranslator.model.google.TranslatedTextResponseList
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse

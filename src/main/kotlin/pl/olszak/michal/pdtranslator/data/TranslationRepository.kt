@@ -1,4 +1,4 @@
-package pl.olszak.michal.pdtranslator.data.translation
+package pl.olszak.michal.pdtranslator.data
 
 import io.reactivex.Single
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse

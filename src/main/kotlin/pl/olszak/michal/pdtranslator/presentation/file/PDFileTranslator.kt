@@ -1,9 +1,8 @@
 package pl.olszak.michal.pdtranslator.presentation.file
 
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
-import pl.olszak.michal.pdtranslator.domain.transformer.FileTransformer
-import pl.olszak.michal.pdtranslator.model.api.Response
+import pl.olszak.michal.pdtranslator.domain.extractor.FileTextExtractor
+import pl.olszak.michal.pdtranslator.model.remote.Response
 import pl.olszak.michal.pdtranslator.presentation.translator.Translator
 import java.io.File
 import javax.inject.Inject
@@ -14,32 +13,28 @@ import javax.inject.Inject
  */
 class PDFileTranslator @Inject constructor(
         private val translator: Translator,
-        private val transformer: FileTransformer) : FileTranslator {
-
-    private val subject: PublishSubject<Response<String>> = PublishSubject.create()
+        private val textExtractor: FileTextExtractor) : FileTranslator {
 
     override fun translate(file: File) {
-        val list = transformer.transform(file)
+        textExtractor.transform(file)
+                .subscribe({ list ->
+                    val iterator = list.iterator()
+                    if (!iterator.hasNext()) {
+                        translator.dispose()
+                    }
 
-        if (!list.isEmpty()) {
-            val iterator = list.iterator()
-            translator.getTranslation()
-                    .doOnSubscribe({
-                        translator.translate(iterator.next())
-                    })
-                    .subscribe({ response ->
-                        subject.onNext(response)
-                        if(iterator.hasNext()){
-                            translator.translate(iterator.next())
-                        }else{
-                            subject.onComplete()
-                        }
-                    })
-        }else{
-            subject.onComplete()
-        }
+                    translator.getTranslation()
+                            .doOnSubscribe { translator.translate(iterator.next()) }
+                            .subscribe {
+                                if (iterator.hasNext()) {
+                                    translator.translate(iterator.next())
+                                } else {
+                                    translator.dispose()
+                                }
+                            }
+                })
     }
 
-    override fun getObservable(): Observable<Response<String>> = subject
+    override fun getObservable(): Observable<Response<String>> = translator.getTranslation()
 
 }

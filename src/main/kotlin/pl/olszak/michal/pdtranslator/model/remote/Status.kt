@@ -1,4 +1,4 @@
-package pl.olszak.michal.pdtranslator.model.api
+package pl.olszak.michal.pdtranslator.model.remote
 
 /**
  * @author molszak

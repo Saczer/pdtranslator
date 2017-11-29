@@ -1,7 +1,7 @@
 package pl.olszak.michal.pdtranslator.presentation.file
 
 import io.reactivex.Observable
-import pl.olszak.michal.pdtranslator.model.api.Response
+import pl.olszak.michal.pdtranslator.model.remote.Response
 import java.io.File
 
 /**

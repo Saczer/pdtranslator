@@ -4,8 +4,8 @@ import io.reactivex.Observable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.subjects.PublishSubject
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslationUseCase
-import pl.olszak.michal.pdtranslator.model.api.Response
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse
+import pl.olszak.michal.pdtranslator.model.remote.Response
 import javax.inject.Inject
 
 /**
@@ -23,7 +23,7 @@ class TextTranslator @Inject constructor(private val translationUseCase: Transla
                 val output = translation.data
                         .translations
                         .joinToString { response ->
-                            response.translatedText
+                            response.translatedText + "."
                         }
 
                 subject.onNext(Response.success(output))
@@ -37,5 +37,10 @@ class TextTranslator @Inject constructor(private val translationUseCase: Transla
     }
 
     override fun getTranslation(): Observable<Response<String>> = subject
+
+    override fun dispose() {
+        translationUseCase.dispose()
+        subject.onComplete()
+    }
 
 }

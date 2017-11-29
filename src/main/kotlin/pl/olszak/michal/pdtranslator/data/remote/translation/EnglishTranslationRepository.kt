@@ -1,7 +1,8 @@
-package pl.olszak.michal.pdtranslator.data.translation
+package pl.olszak.michal.pdtranslator.data.remote.translation
 
-import pl.olszak.michal.pdtranslator.data.RestService
+import pl.olszak.michal.pdtranslator.data.remote.RestService
 import io.reactivex.Single
+import pl.olszak.michal.pdtranslator.data.TranslationRepository
 import pl.olszak.michal.pdtranslator.model.Language
 import pl.olszak.michal.pdtranslator.model.TranslationRequest
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse
@@ -11,7 +12,7 @@ import javax.inject.Inject
  * @author molszak
  * created on 27.11.2017.
  */
-class RestTranslationRepository @Inject constructor(private val service: RestService) : TranslationRepository {
+class EnglishTranslationRepository @Inject constructor(private val service: RestService) : TranslationRepository {
 
     override fun getPolishTranslation(text: String): Single<TranslationApiResponse> {
         val request = TranslationRequest(

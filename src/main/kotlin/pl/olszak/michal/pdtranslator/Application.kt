@@ -2,7 +2,7 @@ package pl.olszak.michal.pdtranslator
 
 import pl.olszak.michal.pdtranslator.di.component.DaggerTranslationComponent
 import pl.olszak.michal.pdtranslator.di.component.TranslationComponent
-import pl.olszak.michal.pdtranslator.model.api.Status
+import pl.olszak.michal.pdtranslator.model.remote.Status
 import java.io.File
 
 /**
@@ -25,24 +25,22 @@ class Application {
             val translator = component.fileTranslator()
 
             val file = File("ep6.pdf")
-            if(file.exists()){
+            if (file.exists()) {
                 translator.translate(file)
-            }else{
+            } else {
                 println("no file to translate")
             }
 
             translator.getObservable()
-                    .blockingSubscribe({ response ->
+                    .blockingSubscribe { response ->
                         if (response.status == Status.ERROR) {
                             println("ERROR receiving : ${response.throwable?.toString()}")
                         } else {
                             println("translation: ${response.data}")
                         }
-                    })
+                    }
 
-//            while (true){
-//                Thread.sleep(200)
-//            }
+
         }
     }
 }

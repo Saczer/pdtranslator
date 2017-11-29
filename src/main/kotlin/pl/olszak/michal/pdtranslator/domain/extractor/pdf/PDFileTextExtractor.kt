@@ -1,20 +1,26 @@
-package pl.olszak.michal.pdtranslator.domain.transformer.pdf
+package pl.olszak.michal.pdtranslator.domain.extractor.pdf
 
+import io.reactivex.Single
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.text.PDFTextStripper
-import pl.olszak.michal.pdtranslator.domain.transformer.FileTransformer
+import pl.olszak.michal.pdtranslator.domain.extractor.FileTextExtractor
+import pl.olszak.michal.pdtranslator.util.trimFromNewLines
 import java.io.File
 import java.util.*
 
 /**
- * REPLACE THIS WITH SOME OBSERVABLE SOURCE
- *
  * @author molszak
  * created on 28.11.2017.
  */
-class PDFileTransformer : FileTransformer {
+class PDFileTextExtractor : FileTextExtractor {
 
-    override fun transform(file: File): List<String> {
+    override fun transform(file: File): Single<List<String>> {
+        return Single.fromCallable({
+            transformFile(file)
+        })
+    }
+
+    private fun transformFile(file: File): List<String> {
         val list: MutableList<String> = LinkedList()
 
         val document = PDDocument.load(file)
@@ -28,10 +34,8 @@ class PDFileTransformer : FileTransformer {
             stripper.endPage = i
 
             val pageText = stripper.getText(document)
-            val transformed = pageText
-                    .replace("\r", " ", true)
-                    .replace("\n", " ", true)
-                    .replace(Regex("\\s+"), " ")
+            val transformed = pageText.trimFromNewLines()
+
             list.add(transformed)
         }
 

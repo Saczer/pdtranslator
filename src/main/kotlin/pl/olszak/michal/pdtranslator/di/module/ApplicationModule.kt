@@ -2,11 +2,11 @@ package pl.olszak.michal.pdtranslator.di.module
 
 import dagger.Module
 import dagger.Provides
-import pl.olszak.michal.pdtranslator.data.translation.StubTranslationRepository
-import pl.olszak.michal.pdtranslator.data.translation.TranslationRepository
+import pl.olszak.michal.pdtranslator.data.local.translation.StubTranslationRepository
+import pl.olszak.michal.pdtranslator.data.TranslationRepository
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslationUseCase
-import pl.olszak.michal.pdtranslator.domain.transformer.pdf.PDFileTransformer
+import pl.olszak.michal.pdtranslator.domain.extractor.pdf.PDFileTextExtractor
 import pl.olszak.michal.pdtranslator.presentation.file.FileTranslator
 import pl.olszak.michal.pdtranslator.presentation.file.PDFileTranslator
 import pl.olszak.michal.pdtranslator.presentation.translator.TextTranslator
@@ -37,7 +37,7 @@ class ApplicationModule {
     @Provides
     @PerApplication
     fun provideFileTranslator(translator: Translator): FileTranslator {
-        return PDFileTranslator(translator, PDFileTransformer())
+        return PDFileTranslator(translator, PDFileTextExtractor())
     }
 
 

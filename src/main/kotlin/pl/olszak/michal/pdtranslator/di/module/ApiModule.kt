@@ -7,7 +7,7 @@ import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import pl.olszak.michal.pdtranslator.data.Constants
-import pl.olszak.michal.pdtranslator.data.RestService
+import pl.olszak.michal.pdtranslator.data.remote.RestService
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
