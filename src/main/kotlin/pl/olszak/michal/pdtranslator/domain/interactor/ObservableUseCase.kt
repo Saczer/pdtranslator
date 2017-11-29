@@ -32,7 +32,7 @@ abstract class ObservableUseCase<T, in Params> {
         }
     }
 
-    protected fun addDisposable(disposable: Disposable) {
+    private fun addDisposable(disposable: Disposable) {
         disposables.add(disposable)
     }
 }

@@ -1,7 +1,9 @@
 package pl.olszak.michal.pdtranslator.presentation.translator
 
 import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.subjects.AsyncSubject
 import io.reactivex.subjects.PublishSubject
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslationUseCase
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse
@@ -12,12 +14,11 @@ import javax.inject.Inject
  * @author molszak
  * created on 27.11.2017.
  */
-class TextTranslator @Inject constructor(private val translationUseCase: TranslationUseCase) : Translator {
+class TextTranslator @Inject constructor(private val translationUseCase: TranslationUseCase) : Translator{
 
     private val subject: PublishSubject<Response<String>> = PublishSubject.create()
 
     override fun translate(text: String) {
-
         translationUseCase.execute(singleObserver = object : DisposableSingleObserver<TranslationApiResponse>() {
             override fun onSuccess(translation: TranslationApiResponse) {
                 val output = translation.data
@@ -39,8 +40,8 @@ class TextTranslator @Inject constructor(private val translationUseCase: Transla
     override fun getTranslation(): Observable<Response<String>> = subject
 
     override fun dispose() {
-        translationUseCase.dispose()
         subject.onComplete()
+        translationUseCase.dispose()
     }
 
 }
