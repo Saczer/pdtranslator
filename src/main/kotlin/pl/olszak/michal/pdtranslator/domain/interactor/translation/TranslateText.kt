@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @author molszak
  * created on 27.11.2017.
  */
-class TranslationUseCase @Inject constructor(
+class TranslateText @Inject constructor(
         private val repository: TranslationRepository)
     : SingleUseCase<TranslationApiResponse, String>() {
 
