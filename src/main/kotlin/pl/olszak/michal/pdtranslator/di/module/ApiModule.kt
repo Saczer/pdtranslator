@@ -6,13 +6,13 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import pl.olszak.michal.pdtranslator.data.Constants
 import pl.olszak.michal.pdtranslator.data.remote.RestService
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 /**
  * @author molszak
@@ -24,13 +24,13 @@ class ApiModule {
 
     @Provides
     @PerApplication
-    fun provideInterceptor(): Interceptor {
+    fun provideInterceptor(@Named("serviceKey") serviceKey : String): Interceptor {
         return Interceptor { chain ->
             val original = chain.request()
             val url = original.url()
 
             val newUrl = url.newBuilder()
-                    .addQueryParameter("key", Constants.API_KEY)
+                    .addQueryParameter("key", serviceKey)
                     .build()
             val request = original.newBuilder()
                     .url(newUrl)
@@ -65,13 +65,13 @@ class ApiModule {
 
     @Provides
     @PerApplication
-    fun provideRestAdapter(client: OkHttpClient, moshi: Moshi): Retrofit {
+    fun provideRestAdapter(client: OkHttpClient, moshi: Moshi,@Named("remoteUrl") url : String): Retrofit {
         val builder = Retrofit.Builder()
 
         builder.client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl(Constants.URL)
+                .baseUrl(url)
 
         return builder.build()
     }
