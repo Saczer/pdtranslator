@@ -1,6 +1,8 @@
 package pl.olszak.michal.pdtranslator.presentation.translator
 
 import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.functions.Cancellable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.subjects.PublishSubject
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslateText
@@ -36,10 +38,5 @@ class TextTranslator @Inject constructor(private val translateText: TranslateTex
     }
 
     override fun getTranslation(): Observable<Response<String>> = subject
-
-    override fun dispose() {
-        subject.onComplete()
-        translateText.dispose()
-    }
 
 }

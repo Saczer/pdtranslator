@@ -11,12 +11,13 @@ import pl.olszak.michal.pdtranslator.util.trimFromNewLines
 import java.io.File
 import java.io.IOException
 import java.util.*
+import javax.inject.Inject
 
 /**
  * @author molszak
  * created on 28.11.2017.
  */
-class PDFileTextExtractor : FileTextExtractor {
+class PDFileTextExtractor @Inject constructor(): FileTextExtractor {
 
     override fun transform(file: File): Single<List<String>> {
         return Single.create(FileTransformer(file))

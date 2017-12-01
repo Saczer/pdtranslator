@@ -5,7 +5,9 @@ import dagger.Provides
 import pl.olszak.michal.pdtranslator.data.TranslationRepository
 import pl.olszak.michal.pdtranslator.data.remote.translation.EnglishTranslationRepository
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
+import pl.olszak.michal.pdtranslator.domain.extractor.FileTextExtractor
 import pl.olszak.michal.pdtranslator.domain.extractor.pdf.PDFileTextExtractor
+import pl.olszak.michal.pdtranslator.domain.interactor.extraction.ExtractTextFromFile
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslateText
 import pl.olszak.michal.pdtranslator.presentation.file.FileTranslator
 import pl.olszak.michal.pdtranslator.presentation.file.PDFileTranslator
@@ -29,19 +31,18 @@ class ApplicationModule {
 
     @Provides
     @PerApplication
-    fun provideTranslationUseCase(
-            repository: TranslationRepository): TranslateText = TranslateText(repository)
-
-    @Provides
-    @PerApplication
     fun provideTranslator(
             translateText: TranslateText): Translator = TextTranslator(translateText)
 
     @Provides
     @PerApplication
-    fun provideFileTranslator(translator: Translator): FileTranslator {
-        return PDFileTranslator(translator, PDFileTextExtractor())
-    }
+    fun provideTextExtractor(extractor: PDFileTextExtractor): FileTextExtractor = extractor
+
+    @Provides
+    @PerApplication
+    fun provideFileTranslator(translateText: TranslateText,
+                              extractTextFromFile: ExtractTextFromFile): FileTranslator =
+            PDFileTranslator(extractTextFromFile, translateText)
 
     @Provides
     @PerApplication

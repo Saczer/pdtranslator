@@ -24,23 +24,14 @@ class Application {
             val component = Application().component()
             val translator = component.fileTranslator()
 
-            val file = File("ep6.pdf")
-            if (file.exists()) {
-                translator.translate(file)
-            } else {
-                println("no file to translate")
-            }
-
+            translator.translate("ep6.pdf")
             translator.getObservable()
                     .blockingSubscribe { response ->
-                        if (response.status == Status.ERROR) {
-                            println("ERROR receiving : ${response.throwable?.toString()}")
-                        } else {
-                            println("translation: ${response.data}")
+                        when(response.status){
+                            Status.ERROR -> println(response.throwable?.localizedMessage ?: "error")
+                            Status.SUCCESS -> println(response.data)
                         }
                     }
-
-
         }
     }
 }

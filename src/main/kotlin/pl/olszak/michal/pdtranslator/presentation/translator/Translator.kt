@@ -13,6 +13,4 @@ interface Translator {
 
     fun getTranslation() : Observable<Response<String>>
 
-    fun dispose()
-
 }
