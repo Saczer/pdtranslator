@@ -5,6 +5,8 @@ import dagger.Provides
 import pl.olszak.michal.pdtranslator.data.TranslationRepository
 import pl.olszak.michal.pdtranslator.data.remote.translation.EnglishTranslationRepository
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
+import pl.olszak.michal.pdtranslator.domain.collector.FileResultCollector
+import pl.olszak.michal.pdtranslator.domain.collector.text.TextFileResultCollector
 import pl.olszak.michal.pdtranslator.domain.extractor.FileTextExtractor
 import pl.olszak.michal.pdtranslator.domain.extractor.pdf.PDFileTextExtractor
 import pl.olszak.michal.pdtranslator.domain.interactor.extraction.ExtractTextFromFile
@@ -63,6 +65,10 @@ class ApplicationModule {
     fun provideProperties(): Properties {
         return PropertiesUtil.loadProperties()
     }
+
+    @Provides
+    @PerApplication
+    fun provideFileResultCollector(textFileResultCollector: TextFileResultCollector) : FileResultCollector = textFileResultCollector
 
 
 }
