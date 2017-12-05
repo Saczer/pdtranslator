@@ -19,7 +19,6 @@ object PropertiesUtil {
                     .use { properties.load(it) }
         } catch (ex: IOException) {
             println(ex.localizedMessage)
-            TODO("should change the exception handling, some logger implementation")
         }
 
         return properties

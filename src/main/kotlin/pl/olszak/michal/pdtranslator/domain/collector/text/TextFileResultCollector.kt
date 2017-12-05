@@ -23,9 +23,9 @@ class TextFileResultCollector @Inject constructor() : FileResultCollector {
             if (data.filePath.isEmpty() || data.fileName.isEmpty()) {
                 emitter.onError(IOException("File path and name should not be empty"))
             }
-            val file = File(data.filePath, data.fileName + FILE_EXTENSION);
+            val file = File(data.filePath, data.fileName + FILE_EXTENSION)
             if (!file.exists() || !file.parentFile.exists()) {
-                file.mkdirs()
+                file.parentFile.mkdirs()
             }
 
             try {

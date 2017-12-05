@@ -2,8 +2,6 @@ package pl.olszak.michal.pdtranslator
 
 import pl.olszak.michal.pdtranslator.di.component.DaggerTranslationComponent
 import pl.olszak.michal.pdtranslator.di.component.TranslationComponent
-import pl.olszak.michal.pdtranslator.model.remote.Status
-import java.io.File
 
 /**
  * @author molszak
@@ -23,15 +21,11 @@ class Application {
         fun main(args: Array<String>) {
             val component = Application().component()
             val translator = component.fileTranslator()
+            val fileCollectionController = component.collectionController()
 
-            translator.translate("ep6.pdf")
+            translator.translate("pp7.pdf")
             translator.getObservable()
-                    .blockingSubscribe { response ->
-                        when(response.status){
-                            Status.ERROR -> println(response.throwable?.localizedMessage ?: "error")
-                            Status.SUCCESS -> println(response.data)
-                        }
-                    }
+                    .blockingSubscribe(fileCollectionController)
         }
     }
 }

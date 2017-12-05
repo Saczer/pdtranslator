@@ -3,6 +3,8 @@ package pl.olszak.michal.pdtranslator.di.component
 import dagger.Component
 import pl.olszak.michal.pdtranslator.di.module.ApplicationModule
 import pl.olszak.michal.pdtranslator.di.scope.PerApplication
+import pl.olszak.michal.pdtranslator.domain.interactor.collection.CollectToFile
+import pl.olszak.michal.pdtranslator.presentation.FileCollectionController
 import pl.olszak.michal.pdtranslator.presentation.file.FileTranslator
 
 /**
@@ -15,5 +17,7 @@ import pl.olszak.michal.pdtranslator.presentation.file.FileTranslator
 interface TranslationComponent {
 
     fun fileTranslator() : FileTranslator
+
+    fun collectionController() : FileCollectionController
 
 }
