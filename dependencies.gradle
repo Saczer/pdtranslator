@@ -8,6 +8,8 @@ ext {
     moshiVersion = '1.5.0'
     persistenceVersion = '2.2.0'
 
+    junitVersion = '4.12'
+
     translatorDependencies = [
             pdfbox           : "org.apache.pdfbox:pdfbox:$pdfboxVersion",
             retrofit         : "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -20,5 +22,9 @@ ext {
             moshi            : "com.squareup.moshi:moshi:$moshiVersion",
             moshiKotlin      : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
             moshiConverter   : "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    ]
+
+    translatorTestDependencies = [
+            junit: "junit:junit:$junitVersion"
     ]
 }

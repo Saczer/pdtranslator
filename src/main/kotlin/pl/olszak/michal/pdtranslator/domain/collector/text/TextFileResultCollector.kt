@@ -5,10 +5,7 @@ import io.reactivex.SingleEmitter
 import io.reactivex.SingleOnSubscribe
 import pl.olszak.michal.pdtranslator.domain.collector.FileResultCollector
 import pl.olszak.michal.pdtranslator.model.collect.FileData
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 import javax.inject.Inject
 
 class TextFileResultCollector @Inject constructor() : FileResultCollector {
@@ -29,6 +26,7 @@ class TextFileResultCollector @Inject constructor() : FileResultCollector {
             }
 
             try {
+
                 FileOutputStream(file).use { stream ->
                     stream.write(data.content.toByteArray())
                 }

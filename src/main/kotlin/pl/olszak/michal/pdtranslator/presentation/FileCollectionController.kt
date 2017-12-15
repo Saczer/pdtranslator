@@ -6,6 +6,7 @@ import pl.olszak.michal.pdtranslator.domain.interactor.collection.CollectToFile
 import pl.olszak.michal.pdtranslator.model.collect.FileData
 import pl.olszak.michal.pdtranslator.model.remote.Response
 import pl.olszak.michal.pdtranslator.model.remote.Status
+import pl.olszak.michal.pdtranslator.util.TextUtils
 import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
@@ -27,7 +28,9 @@ class FileCollectionController @Inject constructor(private val collectToFile: Co
             }
             Status.SUCCESS -> {
                 if (response.data != null && response.data.isNotEmpty()) {
-                    val data = FileData(counter.get().toString(), TRANSLATION_FOLDER, response.data)
+                    val translated = TextUtils.createUserReadableString(response.data)
+
+                    val data = FileData(counter.get().toString(), TRANSLATION_FOLDER, translated)
                     collectToFile.execute(object : DisposableSingleObserver<File>() {
                         override fun onError(throwable: Throwable) {
                             println("this error should not happen")
