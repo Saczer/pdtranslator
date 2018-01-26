@@ -3,7 +3,7 @@ package pl.olszak.michal.pdtranslator.presentation.file
 import io.reactivex.Observable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.subjects.PublishSubject
-import pl.olszak.michal.pdtranslator.domain.interactor.extraction.ExtractTextFromFile
+import pl.olszak.michal.pdtranslator.domain.interactor.translation.ExtractTextFromFile
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslateText
 import pl.olszak.michal.pdtranslator.model.google.TranslationApiResponse
 import pl.olszak.michal.pdtranslator.model.remote.Response

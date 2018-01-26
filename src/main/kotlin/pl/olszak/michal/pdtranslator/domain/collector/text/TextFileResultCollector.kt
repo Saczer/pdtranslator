@@ -26,7 +26,6 @@ class TextFileResultCollector @Inject constructor() : FileResultCollector {
             }
 
             try {
-
                 FileOutputStream(file).use { stream ->
                     stream.write(data.content.toByteArray())
                 }

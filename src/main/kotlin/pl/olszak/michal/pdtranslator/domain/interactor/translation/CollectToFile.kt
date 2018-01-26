@@ -1,4 +1,4 @@
-package pl.olszak.michal.pdtranslator.domain.interactor.collection
+package pl.olszak.michal.pdtranslator.domain.interactor.translation
 
 import io.reactivex.Single
 import pl.olszak.michal.pdtranslator.domain.collector.FileResultCollector

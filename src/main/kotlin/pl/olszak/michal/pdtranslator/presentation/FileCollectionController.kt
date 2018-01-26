@@ -2,7 +2,7 @@ package pl.olszak.michal.pdtranslator.presentation
 
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
-import pl.olszak.michal.pdtranslator.domain.interactor.collection.CollectToFile
+import pl.olszak.michal.pdtranslator.domain.interactor.translation.CollectToFile
 import pl.olszak.michal.pdtranslator.model.collect.FileData
 import pl.olszak.michal.pdtranslator.model.remote.Response
 import pl.olszak.michal.pdtranslator.model.remote.Status

@@ -1,4 +1,4 @@
-package pl.olszak.michal.pdtranslator.domain.interactor.extraction
+package pl.olszak.michal.pdtranslator.domain.interactor.translation
 
 import io.reactivex.Single
 import pl.olszak.michal.pdtranslator.domain.extractor.FileTextExtractor

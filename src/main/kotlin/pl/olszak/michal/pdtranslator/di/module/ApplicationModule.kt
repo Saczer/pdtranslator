@@ -9,7 +9,7 @@ import pl.olszak.michal.pdtranslator.domain.collector.FileResultCollector
 import pl.olszak.michal.pdtranslator.domain.collector.text.TextFileResultCollector
 import pl.olszak.michal.pdtranslator.domain.extractor.FileTextExtractor
 import pl.olszak.michal.pdtranslator.domain.extractor.pdf.PDFileTextExtractor
-import pl.olszak.michal.pdtranslator.domain.interactor.extraction.ExtractTextFromFile
+import pl.olszak.michal.pdtranslator.domain.interactor.translation.ExtractTextFromFile
 import pl.olszak.michal.pdtranslator.domain.interactor.translation.TranslateText
 import pl.olszak.michal.pdtranslator.presentation.file.FileTranslator
 import pl.olszak.michal.pdtranslator.presentation.file.PDFileTranslator
